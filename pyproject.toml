@@ -1,9 +1,9 @@
 [project]
-name = "cli-python"
+name = "gitpy"
 version = "0.1.0"
 dependencies = [
     "click"
 ]
 
 [project.scripts]
-marken = "cli_python.main:main"
+marken = "gitpy.main:main"
