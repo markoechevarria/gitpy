@@ -15,30 +15,36 @@ class Files:
         self.repository_route = os.getcwd()
 
     def start_repository(self):
-        
+        """Creating .gitpy directorie, other directories and files"""
+
         if os.path.exists( Path( os.getcwd(), '.gitpy')):
             print(f"{Color.YELLOW}Here already exists a respository{Color.END}")
             return  
 
-        print(f"{Color.GREEN}Initalizing repository...{Color.END}")
-
-        os.mkdir('.gitpy')
-        with open( Path('.gitpy','commit_0'), 'w') as f:
-            f.write( "commiting" )
-
-        print(f"{Color.GREEN}Repository initalized{Color.END}")
-
+        try: 
+            print(f"{Color.GREEN}Initalizing repository...{Color.END}")
+            os.mkdir( '.gitpy')
+            os.mkdir( Path('.gitpy', 'objects') )
+            os.mkdir( Path('.gitpy', 'refs') )
+            open( Path('.gitpyignore'), 'w').close()
+            open( Path('.gitpy', 'HEAD'), 'w').close()
+            print(f"{Color.GREEN}Repository initalized{Color.END}")
+        except Exception as e:
+            print('Error trying to start the repository', e)
 
     def delete_repository(self):
+        """ Delete .gitpy directorie and .gitpyignore file"""
 
         if not os.path.exists( Path( os.getcwd(), '.gitpy')):
             print(f"{Color.YELLOW}Here doesn't exist a respository{Color.END}")
             return 
 
-        shutil.rmtree( Path(os.getcwd(), '.gitpy') )
-
-        print(f"{Color.GREEN}Repository deleted{Color.END}")
-
+        try:
+            os.remove('.gitpyignore')
+            shutil.rmtree( Path(os.getcwd(), '.gitpy') )
+            print(f"{Color.GREEN}Repository deleted{Color.END}")
+        except Exception as e:
+            print('Error trying to delete repository', e)
 
     def list_files(self):
         list_directories = os.listdir( os.getcwd() )
