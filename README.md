@@ -1,6 +1,6 @@
 # GitPy
 
-A VCS (Version Source Control) written in python.
+A VCS (Version Control System) written in python.
 
 ## Installation
 
