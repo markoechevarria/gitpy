@@ -13,6 +13,9 @@ def run(option):
     if option == 'end':
         item.delete_repository()
 
+    if option == 'add':
+        item.add_files()
+
 if __name__ == "__main__":
     run()
 

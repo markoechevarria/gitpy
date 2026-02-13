@@ -84,3 +84,8 @@ __pypackages__/
 .venv
 env/
 venv/
+
+# specific gitpy files
+
+.gitpy
+.gitpyignore

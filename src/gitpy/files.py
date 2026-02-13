@@ -1,13 +1,8 @@
 import os
 from pathlib import Path
 import shutil
-
-class Color:
-    RED = '\033[91m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    BLUE = '\033[94m'
-    END = '\033[0m'
+from utils import Utils
+from color import Color
 
 class Files:
 
@@ -46,6 +41,34 @@ class Files:
         except Exception as e:
             print('Error trying to delete repository', e)
 
+    def add_files(self):
+        """Add files to the stage area"""
+
+        try:
+            ignore_files = Utils.list_gitpyignore()
+            target_files = os.listdir()
+
+            for target in target_files:
+                if target in ignore_files:
+                    continue
+
+                if not os.path.isfile( Path(target) ):
+                    continue
+
+                hast_object = Utils.create_hash_object(target)
+
+                if not hast_object:
+                    continue
+                    
+                sha_code, file_with_header = hast_object
+                file_blob = Utils.create_blob_object( file_with_header )
+
+                print(f"{Color.GREEN}{"Stagging":^10} {target:^20} {sha_code:^20}{Color.END}")
+
+        except Exception as e:
+            print( "Ocur a problem trying to add files")
+
+
     def list_files(self):
         list_directories = os.listdir( os.getcwd() )
         for entry in list_directories:
@@ -54,5 +77,3 @@ class Files:
 
     def stage_files(self):
         pass
-
-
