@@ -5,16 +5,20 @@ item = Files()
 
 @click.command()
 @click.argument('option')
-def run(option): 
+@click.argument('suboption', default=None)
+def run(option, suboption): 
 
     if option == 'init':
-        item.start_repository()
+        if suboption is None:
+            item.start_repository()
 
     if option == 'end':
-        item.delete_repository()
+        if suboption is None:
+            item.delete_repository()
 
     if option == 'add':
-        item.add_files()
+        if suboption == '.':
+            item.add_files()
 
 if __name__ == "__main__":
     run()

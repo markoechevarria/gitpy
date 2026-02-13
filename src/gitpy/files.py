@@ -21,8 +21,9 @@ class Files:
             os.mkdir( '.gitpy')
             os.mkdir( Path('.gitpy', 'objects') )
             os.mkdir( Path('.gitpy', 'refs') )
-            open( Path('.gitpyignore'), 'w').close()
             open( Path('.gitpy', 'HEAD'), 'w').close()
+            with open( Path('.gitpyignore'), 'w') as file:
+                file.write(".gitignore\n.git/\n.gitpyignore\n.gitpy/")
             print(f"{Color.GREEN}Repository initalized{Color.END}")
         except Exception as e:
             print('Error trying to start the repository', e)
