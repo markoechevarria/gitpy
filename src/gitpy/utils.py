@@ -48,3 +48,33 @@ class Utils:
 
         except Exception as e:
             print("Error trying to convert the file content to a blob object")
+        
+    @staticmethod
+    def insert_blob( root_path: str, sha_code: str, blob_file: bytes ):
+        """ Create the blob file with path in .gitpy/objetcts/ """ 
+
+        try:
+            folder_name = sha_code[:2]
+            file_name = sha_code[2:]
+            route = Path(root_path, '.gitpy', 'objects', folder_name )
+            os.mkdir( route )
+            with open( Path( route, file_name ), 'wb' ) as file:
+                file.write(blob_file)
+ 
+        except Exception as e:
+            print("Error trying to create the blobl object in the path")
+
+    @staticmethod
+    def insert_row_to_index( root_path: str, sha_code: str, file_path: str ):
+        
+        try:
+            code_type_file = 100644
+            stage_number = 0
+
+            row = f"{code_type_file} {sha_code} {stage_number} {file_path}"
+
+            with open( Path(root_path, '.gitpy', 'index'), 'a') as f:
+                f.write(row + '\n')
+
+        except Exception as e:
+            print("Error trying to insert the row to the .git/index ")
