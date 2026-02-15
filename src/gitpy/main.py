@@ -1,4 +1,4 @@
-from files import Files
+from gitpy.files import Files
 import click
 
 item = Files()
@@ -6,7 +6,7 @@ item = Files()
 @click.command()
 @click.argument('option')
 @click.argument('suboption', default=None)
-def run(option, suboption): 
+def main(option, suboption): 
 
     match option:
         case "init":
@@ -26,7 +26,5 @@ def run(option, suboption):
         case _: 
             click.echo("Command unknown. Try again")
 
-
 if __name__ == "__main__":
-    run()
-
+    main()

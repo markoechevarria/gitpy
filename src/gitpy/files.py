@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 import shutil
-from utils import Utils
-from color import Color
+from gitpy.utils import Utils
+from gitpy.color import Color
 
 class Files:
 

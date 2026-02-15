@@ -6,4 +6,4 @@ dependencies = [
 ]
 
 [project.scripts]
-marken = "gitpy.main:main"
+gitpy = "gitpy.main:main"
