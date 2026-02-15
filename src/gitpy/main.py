@@ -8,17 +8,24 @@ item = Files()
 @click.argument('suboption', default=None)
 def run(option, suboption): 
 
-    if option == 'init':
-        if suboption is None:
-            item.start_repository()
+    match option:
+        case "init":
+            if suboption is None:
+                item.start_repository()
+            
+        case "end":
+            if suboption is None:
+                item.delete_repository()
 
-    if option == 'end':
-        if suboption is None:
-            item.delete_repository()
+        case "add":
+            if suboption == '.':
+                item.add_files()
+            else:
+                click.echo("Files were not specified")
 
-    if option == 'add':
-        if suboption == '.':
-            item.add_files()
+        case _: 
+            click.echo("Command unknown. Try again")
+
 
 if __name__ == "__main__":
     run()
