@@ -78,3 +78,25 @@ class Utils:
 
         except Exception as e:
             print("Error trying to insert the row to the .git/index ")
+
+    @staticmethod
+    def insert_branch_to_head( root_path: str, branch_name: str):
+
+        try:
+            with open( Path(root_path, '.gitpy', 'HEAD'), 'w') as f:
+                f.write(f"ref: refs/heads/{branch_name}")
+            
+        except Exception as e:
+            print("Error trying to define the branch name")
+
+    @staticmethod
+    def create_tree_object( blob_list: dict[str, str ]):
+        text = ""
+        for blob_sha, file_name in blob_list.items():
+
+            text = text + f"blob {blob_sha} {file_name}"
+
+
+    @staticmethod
+    def create_commit_object( tree_hash: str, author: str, message: str):
+        content = f"tree {tree_hash}\nauthor {author}\ncommiter {author}\n\n{message}"

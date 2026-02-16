@@ -1,7 +1,7 @@
-from gitpy.files import Files
+from gitpy.gitpy import Gitpy
 import click
 
-item = Files()
+gitpy = Gitpy()
 
 @click.command()
 @click.argument('option')
@@ -11,15 +11,15 @@ def main(option, suboption):
     match option:
         case "init":
             if suboption is None:
-                item.start_repository()
+                gitpy.start_repository()
             
         case "end":
             if suboption is None:
-                item.delete_repository()
+                gitpy.delete_repository()
 
         case "add":
             if suboption == '.':
-                item.add_files()
+                gitpy.add_files()
             else:
                 click.echo("Files were not specified")
 

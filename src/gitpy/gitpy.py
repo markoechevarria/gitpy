@@ -4,7 +4,7 @@ import shutil
 from gitpy.utils import Utils
 from gitpy.color import Color
 
-class Files:
+class Gitpy:
 
     def __init__(self): 
         self.route = os.getcwd()
@@ -21,8 +21,9 @@ class Files:
             os.mkdir( Path( self.route, '.gitpy'))
             os.mkdir( Path( self.route, '.gitpy', 'objects') )
             os.mkdir( Path( self.route, '.gitpy', 'refs') )
-            open( Path( self.route, '.gitpy', 'HEAD'), 'w').close()
             open( Path( self.route, '.gitpy', 'index'), 'w').close()
+            open( Path( self.route, '.gitpy', 'HEAD'), 'w').close()
+            Utils.insert_branch_to_head( self.route, "main")
             with open( Path( self.route, '.gitpyignore'), 'w') as file:
                 file.write(".gitignore\n.git/\n.gitpyignore\n.gitpy/")
             print(f"{Color.GREEN}Repository initalized{Color.END}")
@@ -73,7 +74,9 @@ class Files:
 
         except Exception as e:
             print( "Ocur a problem trying to add files")
-
+    
+    def make_commit(self, message: str):
+        """ Make a commit """
 
     def list_files(self):
         list_directories = os.listdir( os.getcwd() )
